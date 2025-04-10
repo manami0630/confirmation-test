@@ -1,0 +1,91 @@
+.contact-form__content {
+    margin: 0 auto;
+    padding: 30px 15px;
+    max-width: 1230px;
+}
+.contact-form__heading {
+    margin-bottom: 40px;
+    text-align: center;
+    color: rgb(159, 122, 122);
+    font-family: "Noto Serif JP",serif;
+}
+.form {
+    margin: 0 auto;
+    width: 60%;
+    text-align: center;
+}
+.form__group {
+    justify-content: space-between;
+    display: flex;
+    margin-bottom: 15px;
+}
+.form__label--item{
+    font-size: 20px;
+    color: rgb(159, 122, 122);
+}
+.form__label--required {
+    margin-left: 5px;
+    padding: 4px 6px;
+    color: red;
+    font-size: 20px;
+}
+.form__error {
+    height: 20px;
+    color: #ff0000;
+    text-align: left;
+    font-size: 16px;
+}
+.form__input--text{
+    display: flex;
+}
+.form__input--text select,
+.form__input--text input,
+.form__input--textarea textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    width: 100%;
+    background-color: #cccccc64;
+}
+.form__group-content{
+    width: 70%;
+    text-align: center;
+}
+.form__input--textarea textarea{
+    height: 150px;
+}
+.form__button {
+    margin-top: 30px;
+}
+
+.form__button-submit {
+    padding: 10px;
+    width: 20%;
+    height: 50px;
+    border: none;
+    background: rgb(159, 122, 122);
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+}
+.form__group-gender{
+    width: 70%;
+    padding-right: 100px;
+}
+label input{
+    margin: 10px;
+}
+.form__input--text span{
+    margin: 10px 5px;
+}
+.space{
+    padding: 0 10px;
+}
+.form__group-radio{
+    width: 70%;
+}
+.form__error-space{
+    padding: 0 105px;
+}
+.form__input--radio{
+    display: flex;
+}

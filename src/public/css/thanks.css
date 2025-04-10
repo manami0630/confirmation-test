@@ -1,0 +1,32 @@
+.background__thanks {
+    color: rgba(159, 122, 122, 0.099);
+    text-align: center;
+    font-size: 250px;
+    font-family: "Noto Serif JP", serif;
+    width: 100%;
+}
+
+.thanks__content {
+    position: relative;
+}
+
+.thanks__heading {
+    margin-bottom: 50px;
+    color: rgb(159, 122, 122);
+    position: absolute;
+    top: 140px;
+    left: 655px;
+}
+
+.form__button-submit {
+    width: 10%;
+    height: 40px;
+    border: none;
+    background: rgb(159, 122, 122);
+    color: #fff;
+    font-size: 16px;
+    font-family: "Noto Serif JP", serif;
+    position: absolute;
+    top: 255px;
+    left: 780px;
+}
