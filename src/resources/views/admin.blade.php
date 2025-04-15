@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/common.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <link rel="stylesheet" href="{{ asset('css/contacts.css') }}" />
 </head>
 <body>
     <header>
@@ -18,57 +15,46 @@
                 <h1 class="header__logo">
                     Fashionably Late
                 </h1>
-                <nav>
-                    <form class="header-nav__item" action="/logout" method="post">
-                    @csrf
-                        <input class="header-nav__link" type="submit" value="logout">
-                    </form>
-                </nav>
+                <form action="/logout" method="post">
+                @csrf
+                    <input class="header__link" type="submit" value="logout">
+                </form>
             </div>
         </div>
     </header>
     <main>
-        <div class="contact-form__conte">
-            <div class="contact-form__heading">
-                <h2>Admin</h2>
-            </div>
-                <form class="search-form" method="get">
+        <div class="admin">
+            <h2 class="admin__heading">Admin</h2>
+            <div class="admin__inner">
+                <form class="search-form" action="/search" method="get">
                 @csrf
                     <input type="text" name="search-form__keyword-input" placeholder="名前やメールアドレスを入力してください" value="{{ request('search') }}"/>
+                    <span class="separator"></span>
                     <div class="search-form__gender">
                         <select class="search-form__gender-select" name="gender" value="{{request('gender')}}">
                             <option disabled selected>性別</option>
-                            <option value="1" @if( request('gender')==1 ) selected @endif>男性</option>
-                            <option value="2" @if( request('gender')==2 ) selected @endif>女性</option>
-                            <option value="3" @if( request('gender')==3 ) selected @endif>その他</option>
+                            <option value="1" @if( request('gender') ==1 ) selected @endif>男性</option>
+                            <option value="2" @if( request('gender') ==2 ) selected @endif>女性</option>
+                            <option value="3" @if( request('gender') ==3 ) selected @endif>その他</option>
                         </select>
                     </div>
+                    <span class="separator"></span>
                     <div class="search-form__category">
                         <select class="search-form__category-select" name="category_id">
                             <option disabled selected>お問い合わせの種類</option>
                             @foreach($categories as $category)
                             <option value="{{ $category->id }}" @if( request('category_id')==$category->id ) selected @endif>{{$category->content }}</option>
+                            @endforeach
                         </select>
                     </div>
+                    <span class="separator"></span>
                     <input class="search-form__date" type="date" name="date" value="{{request('date')}}">
+                    <span class="separator"></span>
                     <div class="search-form__actions">
                         <input class="search-form__search-btn btn" type="submit" value="検索">
                         <input class="search-form__reset-btn btn" type="submit" value="リセット" name="reset">
                     </div>
                 </form>
-
-                        <div class="form__input--day">
-                            <input type="text" id="datePicker" placeholder="年/月/日" value="{{ request('date') }}"/>
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    flatpickr("#datePicker", {
-                                        dateFormat: "Y/m/d",
-                                        defaultDate: "new Datetime()",
-                                    });
-                                });
-                            </script>
-                        </div>
-
                 <div class="export-form">
                     <form action="{{'/export?'.http_build_query(request()->query())}}" method="post">
                     @csrf

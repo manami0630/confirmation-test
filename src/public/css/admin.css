@@ -3,7 +3,6 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-
 }
 
 .header-nav__item {
@@ -18,15 +17,14 @@
     font-family: "Noto Serif JP", serif;
 }
 
-
-.contact-form__content {
+.admin {
     margin: 0 auto;
     padding: 30px 15px;
     max-width: 100wv;
     height: 650px;
 }
 
-.contact-form__heading {
+.admin__heading {
     margin-bottom: 40px;
     text-align: center;
     color: rgb(159, 122, 122);
@@ -37,6 +35,12 @@ input,
 select {
     border: 1px solid #E3DED9;
     color: #8B7969;
+    padding: 8px 15px;
+    font-size: 16px;
+    width: 100%;
+}
+.separator{
+    margin: 5px;
 }
 
 .admin__inner {
@@ -45,12 +49,21 @@ select {
 }
 .search-form {
     display: flex;
-    align-items: stretch;
-    flex-wrap: wrap;
-
-    gap: 24px;
+    justify-content: space-between;
 }
 
+.pagination{
+    display: flex;
+}
+a{
+    color: rgb(159, 122, 122);
+    text-decoration: none;
+}
+li{
+    padding: 3px 12px;
+    border: 1px solid #E3DED9;
+    color: rgb(159, 122, 122);
+}
 .search-form__keyword-input {
     padding: 8px 12px;
     min-width: 324px;
@@ -230,26 +243,24 @@ select {
 }
 
 .modal__content {
-    position: relative;
     padding: 64px 64px;
 }
 
 .modal-form__group {
-    display: grid;
-    margin-top: 32px;
-
-    grid-template-columns: 1fr 2fr;
-    gap: 20px;
+    display: flex;
 }
 
 .modal-form__label {
     font-weight: bold;
+    padding: 10px;
+    width: 220px;
 }
 
 .modal-form__delete-btn {
-    margin: 64px auto 0;
     background-color: #BA370D;
     color: #FFF;
+    margin-top: 30px;
+    margin-left: 45%;
 }
 
 .modal__close-btn {
@@ -263,4 +274,7 @@ select {
     color: #8B7969;
     text-align: center;
     text-decoration: none;
+}
+.admin__data{
+    color: #8B7969;
 }
