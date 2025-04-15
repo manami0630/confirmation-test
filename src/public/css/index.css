@@ -29,12 +29,7 @@
     color: red;
     font-size: 20px;
 }
-.form__error {
-    height: 20px;
-    color: #ff0000;
-    text-align: left;
-    font-size: 16px;
-}
+
 .form__input--text{
     display: flex;
 }
@@ -88,4 +83,26 @@ label input{
 }
 .form__input--radio{
     display: flex;
+}
+
+.form__error {
+    margin-top: 8px;
+    color: red;
+    text-align: left;
+    font-size: 16px;
+
+    grid-column: 2;
+}
+
+.contact-form__name-group .form__error {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 32px;
+}
+
+.form__error-first-name,
+.form__error-last-name {
+    width: 100%;
 }

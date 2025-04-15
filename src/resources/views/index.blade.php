@@ -22,7 +22,7 @@
                 <h2>Contact</h2>
             </div>
         </div>
-        <form class="form" action="/contacts/confirm" method="post">
+        <form class="form" action="/confirm" method="post">
         @csrf
             <div class="form__group">
                 <div class="form__group-title">
@@ -31,18 +31,17 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--text">
-                        <input type="text" name="last_name" placeholder="例: 山田" value="{{ old('last_name') }}"/>
-                        <span class="space"></span>
-                        <input type="text" name="first_name" placeholder="例: 太郎" value="{{ old('first_name') }}"/>
+                        <input type="text" id="name" name="first_name" placeholder="例: 山田" value="{{ old('first_name') }}"/>
+                        <span class="separator"></span>
+                        <input type="text" id="name" name="last_name" placeholder="例: 太郎" value="{{ old('last_name') }}"/>
                     </div>
                     <div class="form__error">
-                        @error('last_name')
-                        {{ $message }}
-                        @enderror
-                        <span class="form__error-space"></span>
-                        @error('first_name')
-                        {{ $message }}
-                        @enderror
+                        @if ($errors->has('first_name'))
+                        <p class="contact-form__error-message-first-name">{{$errors->first('first_name')}}</p>
+                        @endif
+                        @if ($errors->has('last_name'))
+                        <p class="contact-form__error-message-last-name">{{$errors->first('last_name')}}</p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -55,17 +54,20 @@
                     <div class="form__input--radio">
                         <div class="input__radio">
                             <label>
-                                <input type="radio" name="gender" value="1{{ old('gender') }}" checked/> 男性
+                                <input type="radio" id="male" name="gender" value="1" {{ old('gender')==1 || old('gender')==null ?'checked' : '' }}>
+                                <span class="contact-form__gender-text">男性</span>
                             </label>
                         </div>
                         <div class="form__input--radio">
                             <label>
-                                <input type="radio" name="gender" value="2{{ old('gender') }}"/> 女性
+                                <input type="radio" id="female" name="gender" value="2" {{ old('gender')==2 ? 'checked' : '' }}>
+                                <span class="contact-form__gender-text">女性</span>
                             </label>
                         </div>
                         <div class="form__input--radio">
                             <label>
-                                <input type="radio" name="gender" value="3{{ old('gender') }}"/> その他
+                                <input type="radio" id="other" name="gender" value="3" {{ old('gender')==3 ? 'checked' : '' }}>
+                                <span class="contact-form__gender-text">その他</span>
                             </label>
                         </div>
                     </div>
@@ -99,16 +101,20 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--text">
-                        <input type="tel" name="tel1" placeholder="080" value="{{ old('tel') }}"/>
+                        <input type="tel" name="tel_1" id="tel"  placeholder="080" value="{{ old('tel_1') }}"/>
                         <span class="separator">-</span>
-                        <input type="tel" name="tel2" placeholder="1234" value="{{ old('tel') }}"/>
+                        <input type="tel" name="tel_2" placeholder="1234" value="{{ old('tel_2') }}"/>
                         <span class="separator">-</span>
-                        <input type="tel" name="tel3" placeholder="5678" value="{{ old('tel') }}"/>
+                        <input type="tel" name="tel_3" placeholder="5678" value="{{ old('tel_3') }}"/>
                     </div>
                     <div class="form__error">
-                        @error('tel')
-                        {{ $message }}
-                        @enderror
+                        @if ($errors->has('tel_1'))
+                        {{$errors->first('tel_1')}}
+                        @elseif ($errors->has('tel_2'))
+                        {{$errors->first('tel_2')}}
+                        @else
+                        {{$errors->first('tel_3')}}
+                        @endif
                     </div>
                 </div>
             </div>
@@ -148,10 +154,10 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--text">
-                        <select name="category_id">
+                        <select name="category_id" id="">
                             <option value="">選択してください</option>
                             @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->content }}</option>
+                            <option value="{{ $category->id }}" {{ old('category_id')==$category->id ? 'selected' : '' }}>{{ $category->content }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -169,7 +175,7 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--textarea">
-                        <textarea name="detail" placeholder="お問い合わせ内容をご記入ください"></textarea>
+                        <textarea name="detail" id="" cols="30" rows="10" placeholder="お問い合わせ内容をご記入ください"></textarea>
                     </div>
                     <div class="form__error">
                         @error('detail')

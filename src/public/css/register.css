@@ -45,17 +45,19 @@
 }
 
 .form__group {
-    text-align: center;
     margin-bottom: 10px;
+    margin-top: 20px;
 }
 
-.form__group-title {
+.register-form__label {
     color: rgb(159, 122, 122);
+    display: block;
     text-align: left;
-    margin: 10px 80px;
+    padding-left: 80px;
+    padding-bottom: 5px;
 }
 
-.form__input--text input {
+.register-form__input {
     padding: 10px;
     width: 70%;
     border: 1px solid #cccccc64;
@@ -68,14 +70,11 @@
     color: #ff0000;
 }
 
-.form__button {
+.register-form__btn {
     margin-top: 20px;
-}
-
-.form__button-submit {
     padding: 10px;
-    width: 20%;
-    height: 20%;
+    width: 18%;
+    height: 10%;
     border: none;
     background-color: rgb(159, 122, 122);
     color: #fff;

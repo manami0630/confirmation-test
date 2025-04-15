@@ -16,14 +16,14 @@ class ContactFactory extends Factory
     {
         return [
             'category_id' => $this->faker->numberBetween(1, 5),
-            'first_name' => $this->faker->firstName(),
-            'last_name' => $this->faker->lastName(),
-            'gender' => $this->faker->numberBetween(1, 3),
-            'email' => $this->faker->unique()->safeEmail(),
+            'first_name' => $this->faker->lastName(),
+            'last_name' => $this->faker->firstName(),
+            'gender' => $this->faker->randomElement([1, 2, 3]),
+            'email' => $this->faker->safeEmail(),
             'tel' => $this->faker->phoneNumber(),
-            'address' => $this->faker->address(),
-            'building' => $this->faker->word(),
-            'detail' => $this->faker->paragraph(),
+            'address' => $this->faker->city() . $this->faker->streetAddress(),
+            'building' => $this->faker->secondaryAddress(),
+            'detail' => $this->faker->text(120),
         ];
     }
 }
