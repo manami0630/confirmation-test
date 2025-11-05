@@ -58,15 +58,17 @@ class ContactController extends Controller
     public function search(Request $request)
     {
         if ($request->has('reset')) {
-            return redirect('/admin')->withInput();
+            return redirect('/admin');
         }
+
         $query = Contact::query();
 
         $query = $this->getSearchQuery($request, $query);
 
-        $contacts = $query->paginate(7);
+        $contacts = $query->paginate(7)->appends($request->query());
         $csvData = $query->get();
         $categories = Category::all();
+
         return view('admin', compact('contacts', 'categories', 'csvData'));
     }
 
@@ -79,9 +81,7 @@ class ContactController extends Controller
     public function export(Request $request)
     {
         $query = Contact::query();
-
         $query = $this->getSearchQuery($request, $query);
-
         $csvData = $query->get()->toArray();
 
         $csvHeader = [
@@ -91,45 +91,60 @@ class ContactController extends Controller
         $response = new StreamedResponse(function () use ($csvHeader, $csvData) {
             $createCsvFile = fopen('php://output', 'w');
 
-            mb_convert_variables('SJIS-win', 'UTF-8', $csvHeader);
+            fwrite($createCsvFile, "\xEF\xBB\xBF");
 
             fputcsv($createCsvFile, $csvHeader);
 
             foreach ($csvData as $csv) {
+                switch ($csv['gender']) {
+                    case 1: $csv['gender'] = '男性'; break;
+                    case 2: $csv['gender'] = '女性'; break;
+                    case 3: $csv['gender'] = 'その他'; break;
+                    default: $csv['gender'] = '不明'; break;
+                }
+
                 $csv['created_at'] = Date::make($csv['created_at'])->setTimezone('Asia/Tokyo')->format('Y/m/d H:i:s');
                 $csv['updated_at'] = Date::make($csv['updated_at'])->setTimezone('Asia/Tokyo')->format('Y/m/d H:i:s');
-                fputcsv($createCsvFile, $csv);
+
+                $row = [];
+                foreach ($csvHeader as $key) {
+                    $row[] = isset($csv[$key]) ? (string)$csv[$key] : '';
+                }
+
+                fputcsv($createCsvFile, $row);
             }
 
             fclose($createCsvFile);
         }, 200, [
-            'Content-Type' => 'text/csv',
+            'Content-Type' => 'text/csv; charset=UTF-8',
             'Content-Disposition' => 'attachment; filename="contacts.csv"',
         ]);
 
         return $response;
     }
 
-    private function getSearchQuery($request, $query)
+    private function getSearchQuery(Request $request, $query)
     {
-        if(!empty($request->keyword)) {
-            $query->where(function ($q) use ($request) {
-                $q->where('first_name', 'like', '%' . $request->keyword . '%')
-                    ->orWhere('last_name', 'like', '%' . $request->keyword . '%')
-                    ->orWhere('email', 'like', '%' . $request->keyword . '%');
+        if ($request->filled('keyword')) {
+            $keyword = $request->input('keyword');
+            $query->where(function ($q) use ($keyword) {
+                $q->where('first_name', 'like', "%{$keyword}%")
+                ->orWhere('last_name', 'like', "%{$keyword}%")
+                ->orWhere('email', 'like', "%{$keyword}%")
+                ->orWhereRaw("CONCAT(first_name, last_name) LIKE ?", ["%{$keyword}%"]);
             });
         }
 
-        if (!empty($request->gender)) {
-            $query->where('gender', '=', $request->gender);
+        if ($request->filled('gender')) {
+            $query->where('gender', $request->gender);
         }
 
-        if (!empty($request->category_id)) {
-            $query->where('category_id', '=', $request->category_id);
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->category_id);
         }
 
-        if (!empty($request->date)) {
-            $query->whereDate('created_at', '=', $request->date);
+        if ($request->filled('date')) {
+            $query->whereDate('created_at', $request->date);
         }
 
         return $query;

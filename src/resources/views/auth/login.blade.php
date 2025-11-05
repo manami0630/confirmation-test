@@ -35,22 +35,22 @@
                 <div class="form__group">
                     <label class="login-form__label" for="email">メールアドレス</label>
                     <input class="login-form__input" type="mail" name="email" id="email" placeholder="例: test@example.com" value="{{ old('email') }}">
-                        <div class="form__error">
-                            @error('email')
-                            {{ $message }}
-                            @enderror
-                        </div>
+                    <div class="form__error">
+                        @error('email')
+                        {{ $message }}
+                        @enderror
+                    </div>
                 </div>
                 <div class="form__group">
                     <label class="login-form__label" for="password">パスワード</label>
                     <input class="login-form__input" type="password" name="password" id="password" placeholder="例: coachtech1106">
-                        <div class="form__error">
-                            @error('password')
-                            {{ $message }}
-                            @enderror
-                        </div>
+                    <div class="form__error">
+                        @error('password')
+                        {{ $message }}
+                        @enderror
+                    </div>
                 </div>
-                    <input class="login-form__btn" type="submit" value="ログイン">
+                <input class="login-form__btn" type="submit" value="ログイン">
             </form>
         </div>
     </main>

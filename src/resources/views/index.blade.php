@@ -22,7 +22,7 @@
                 <h2>Contact</h2>
             </div>
         </div>
-        <form class="form" action="/confirm" method="post">
+        <form class="form" action="/confirm" method="post" novalidate>
         @csrf
             <div class="form__group">
                 <div class="form__group-title">
@@ -175,7 +175,7 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--textarea">
-                        <textarea name="detail" id="" cols="30" rows="10" placeholder="お問い合わせ内容をご記入ください"></textarea>
+                        <textarea name="detail" id="" cols="30" rows="10" placeholder="お問い合わせ内容をご記入ください">{{ old('detail') }}</textarea>
                     </div>
                     <div class="form__error">
                         @error('detail')

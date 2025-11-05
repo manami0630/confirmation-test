@@ -28,7 +28,7 @@
             <div class="admin__inner">
                 <form class="search-form" action="/search" method="get">
                 @csrf
-                    <input type="text" name="search-form__keyword-input" placeholder="名前やメールアドレスを入力してください" value="{{ request('search') }}"/>
+                    <input type="text" name="keyword" placeholder="名前やメールアドレスを入力してください" value="{{ request('keyword') }}"/>
                     <span class="separator"></span>
                     <div class="search-form__gender">
                         <select class="search-form__gender-select" name="gender" value="{{request('gender')}}">
@@ -119,7 +119,7 @@
                                     </div>
                                     <div class="modal-form__group">
                                         <label class="modal-form__label" for="">電話番号</label>
-                                        <p>{{$contact->tell}}</p>
+                                        <p>{{$contact->tel}}</p>
                                     </div>
                                     <div class="modal-form__group">
                                         <label class="modal-form__label" for="">住所</label>

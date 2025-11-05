@@ -259,7 +259,7 @@ li{
 .modal-form__delete-btn {
     background-color: #BA370D;
     color: #FFF;
-    margin-top: 30px;
+    width: 15%;
     margin-left: 45%;
 }
 
