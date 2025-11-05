@@ -17,13 +17,12 @@
 6. php artisan db:seed 
 
 ## 使用技術  
-- PHP 8.0  
-- Laravel 10.0  
-- MySQL 8.0
+- PHP 8.44  
+- Laravel 8.83.29  
+- MySQL 8.0.43
 
 ## ER図
-![スクリーンショット 2025-04-07 180749](https://github.com/user-attachments/assets/97354a6f-bb5b-4f73-b26a-fc01984d3fb9)
-
+<img width="919" height="533" alt="スクリーンショット 2025-11-06 020135" src="https://github.com/user-attachments/assets/004ad349-b859-42c6-927f-4e9c85085272" />
 
 ## URL  
 - 開発環境: [http://localhost/](http://localhost/)  
